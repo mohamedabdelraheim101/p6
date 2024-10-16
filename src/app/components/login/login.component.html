@@ -1,0 +1,25 @@
+<p>login works!</p>
+<form (ngSubmit)="handlelogin(loginform)" [formGroup]="loginform">
+
+<label for="name"> name:</label>
+<input formControlName="name" type="text" class="form-control ">
+
+<div *ngIf="loginform.get('name')?.errors && loginform.get('name')?.touched" class="alert alert-danger">
+    <p  *ngIf="loginform.get('name')?.getError('minlength')|json"> min length is 3  </p>
+    <p  *ngIf="loginform.get('name')?.getError('required')|json"> name is required </p>
+    
+</div>
+
+<label for="password">password</label>
+<input formControlName="password" type="password" class="form-control">
+
+<div *ngIf="loginform.get('password')?.errors && loginform.get('password')?.touched" class="alert alert-danger">
+<p *ngIf="loginform.get('password')?.getError('required')|json" >password is required</p>
+<p *ngIf="loginform.get('password')?.getError('pattern')|json" >pasword must start with capital</p>
+<p *ngIf="loginform.get('password')?.getError('minlength')">password min length is 10  </p>
+</div>
+
+
+<button [disabled]="loginform.invalid" type="submit" class="btn btn-primary">submit</button>
+
+</form>
